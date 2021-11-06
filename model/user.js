@@ -9,6 +9,10 @@ const UserSchema = new Schema({
   password: {
     type: 'string',
     require: true,
+  },
+  inClub: {
+    type: 'boolean',
+    require: true,
   }
 })
 

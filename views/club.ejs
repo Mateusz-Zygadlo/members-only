@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Club</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="w-screen h-screen">
+      <% if(!user.inClub){ %>
+        <h1 class="pt-20 flex justify-center text-5xl font-thin">Join the club</h1>
+      <% } else{ %>
+        <h1 class="pt-20 flex justify-center text-5xl font-thin">Leave the club</h1>
+      <% } %> 
+      <div class="w-screen flex justify-center">
+        <form action="/club" method="POST">
+          <button type="submit" name="club" value="confirm" class="mt-5 flex border-gray-300 cursor-pointer border-2 w-36 px-4 py-1 focus:border-blue-300 hover:border-gray-900 transition-colors">Confirm<button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

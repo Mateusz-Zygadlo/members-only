@@ -22,6 +22,7 @@ exports.newUser = [
         const user = new User({
           email: req.body.email,
           password: hashedPassword,
+          inClub: false,
         }).save(err => {
           if (err) { 
             return next(err);
