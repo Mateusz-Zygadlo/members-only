@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Create post</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="p-20">
+      <h1 class="text-5xl p-5">Create post</h1>
+      <div class="p-5">
+        <form action='/create' method='POST'>
+          <input name="title" type="text" placeholder="Enter title" required class="my-2 w-64 border-b-2 border-gray-300 cursor-pointer focus:outline-none focus:border-blue-300 hover:border-gray-900 transition-colors  block">
+          <textarea name="description" type="password" placeholder="Enter description" required class="border-b-2 w-64 border-gray-300 cursor-pointer focus:outline-none focus:border-blue-300 hover:border-gray-900 transition-colors  block"></textarea>
+          <button type="submit" class="mt-5 border-gray-300 cursor-pointer border-2 w-36 px-4 py-1 focus:border-blue-300 hover:border-gray-900 transition-colors">Submit</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

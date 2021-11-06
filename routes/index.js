@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controller/userController');
+const postController = require('../controller/postController');
 const passport = require('passport');
 const initializePassport = require('../passport.config');
 const User = require('../model/user');
@@ -23,7 +24,7 @@ const isLogin = (req, res, next) => {
   next();
 }
 
-router.get('/', checkAuth, (req, res) => res.render('index', {user: req.user}));
+router.get('/', (req, res) => res.render('index', {user: req.user}));
 
 router.get('/log-in', isLogin, (req, res) => res.render('log-in_form'));
 router.post('/log-in', passport.authenticate('local', {
@@ -51,5 +52,11 @@ router.post('/club', checkAuth, (req, res, next) => {
     res.redirect('/');
   })
 })
+
+router.get('/create', checkAuth, (req, res) => {
+  res.render('createPost')
+})
+
+router.post('/create', checkAuth, postController.createPost);
 
 module.exports = router;
