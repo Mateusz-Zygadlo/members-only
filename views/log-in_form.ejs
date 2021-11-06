@@ -12,13 +12,13 @@
       <h1 class="text-5xl p-5">Log in</h1>
       <div class="p-5">
         <form action='/log-in' method='POST'>
-          <input name="email" type="text" placeholder="Enter your username" class="my-2 w-64 border-b-2 border-gray-300 cursor-pointer focus:outline-none focus:border-blue-300 hover:border-gray-900 transition-colors  block">
-          <input name="password" type="password" placeholder="Enter your password" class="border-b-2 w-64 border-gray-300 cursor-pointer focus:outline-none focus:border-blue-300 hover:border-gray-900 transition-colors  block">
+          <input name="email" type="text" placeholder="Enter your username" required class="my-2 w-64 border-b-2 border-gray-300 cursor-pointer focus:outline-none focus:border-blue-300 hover:border-gray-900 transition-colors  block">
+          <input name="password" type="password" placeholder="Enter your password" required class="border-b-2 w-64 border-gray-300 cursor-pointer focus:outline-none focus:border-blue-300 hover:border-gray-900 transition-colors  block">
           <button type="submit" class="mt-5 border-gray-300 cursor-pointer border-2 w-36 px-4 py-1 focus:border-blue-300 hover:border-gray-900 transition-colors">Submit</button>
         </form>
       </div>
       <div class="px-5 w-64">
-        <a class="border-b-2 border-gray-300 hover:border-gray-900 transition-colors" href='/sign-up'>if you do not have an account, click here</a>
+        <a class="border-b-2 border-gray-300 focus:outline-none focus:border-blue-300 hover:border-gray-900 transition-colors" href='/sign-up'>if you do not have an account, click here</a>
       </div>
     </div>
   </body>

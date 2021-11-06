@@ -1,8 +1,10 @@
 const User = require('../model/user');
-const { validationResult } = require("express-validator");
+const bcrypt = require('bcrypt');
 
 exports.newUser = [
-  (req, res, next) => {
+  async (req, res, next) => {
+    const hashedPassword = await bcrypt.hash(req.body.passwordOne, 10);
+
     User.findOne({email: req.body.email}).exec((err, result) => {
       if(err){
         return next(err);
@@ -19,39 +21,14 @@ exports.newUser = [
       }else{
         const user = new User({
           email: req.body.email,
-          password: req.body.passwordOne,
+          password: hashedPassword,
         }).save(err => {
           if (err) { 
             return next(err);
           }
-          res.redirect("/");
+          res.redirect("/log-in");
         });
       }
     })
   }
-]
-
-exports.findUser = [
-  (req, res, next) => {
-    const err = validationResult(req);
-
-    if(!err.isEmpty() || req.body.email == '' || req.body.password == ''){
-      res.render('log-in_form', {err: 'incorrect password or empty input'});
-
-      return;
-    }else{
-      User.find({email: req.body.email, password: req.body.password}).exec((err, result) => {
-        if(err){
-          return next(err);
-        }
-        if(result){
-          console.log(result);
-
-          res.redirect('/');
-        }
-
-        res.render('log-in_form', {err: 'incorrect password or empty input'});
-      })
-    }
-  }
-]
+];
