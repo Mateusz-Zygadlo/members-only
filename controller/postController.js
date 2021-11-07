@@ -36,3 +36,12 @@ exports.allPost = (req, res, next) => {
     res.render('index', {posts: result, user: req.user})
   })
 }
+exports.adminAllPost = (req, res, next) => {
+  Post.find().exec((err, result) => {
+    if(err){
+      return next(err);
+    }
+
+    res.render('admin', {posts: result})
+  })
+}

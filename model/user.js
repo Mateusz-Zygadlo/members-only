@@ -13,6 +13,10 @@ const UserSchema = new Schema({
   inClub: {
     type: 'boolean',
     require: true,
+  },
+  isAdmin: {
+    type: 'boolean',
+    require: true,
   }
 })
 

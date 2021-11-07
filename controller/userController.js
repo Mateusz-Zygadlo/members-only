@@ -23,6 +23,7 @@ exports.newUser = [
           email: req.body.email,
           password: hashedPassword,
           inClub: false,
+          isAdmin: false,
         }).save(err => {
           if (err) { 
             return next(err);

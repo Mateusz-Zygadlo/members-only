@@ -5,12 +5,23 @@ const postController = require('../controller/postController');
 const passport = require('passport');
 const initializePassport = require('../passport.config');
 const User = require('../model/user');
+const Post = require('../model/post');
 
 initializePassport(passport);
 
 const checkAuth = (req, res, next) => {
   if(req.isAuthenticated()){
     return next();
+  }
+
+  res.redirect('/log-in');
+}
+
+const isAdmin = (req, res, next) => {
+  if(req.isAuthenticated()){
+    if(req.user.isAdmin){
+      return next();
+    }
   }
 
   res.redirect('/log-in');
@@ -25,6 +36,15 @@ const isLogin = (req, res, next) => {
 }
 
 router.get('/', postController.allPost);
+router.post('/', (req, res, next) => {
+  Post.deleteOne({_id: req.body.post}).exec((err, result) => {
+    if(err){
+      return next(err);
+    }
+
+    res.redirect('/');
+  });
+})
 
 router.get('/log-in', isLogin, (req, res) => res.render('log-in_form'));
 router.post('/log-in', passport.authenticate('local', {
@@ -59,10 +79,6 @@ router.post('/club', checkAuth, (req, res, next) => {
 
 router.get('/create', checkAuth, (req, res) => {
   res.render('createPost')
-})
-
-router.get('/admin', (req, res) => {
-  res.render('admin');
 })
 
 router.post('/create', checkAuth, postController.createPost);
