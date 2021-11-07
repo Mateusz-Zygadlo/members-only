@@ -14,8 +14,12 @@ const PostSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
+  authorEmail: {
+    type: 'string',
+    require: true,
+  },
   date: {
-    type: 'Date',
+    type: 'string',
     require: true,
   }
 })

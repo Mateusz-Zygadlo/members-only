@@ -24,7 +24,7 @@ const isLogin = (req, res, next) => {
   next();
 }
 
-router.get('/', (req, res) => res.render('index', {user: req.user}));
+router.get('/', postController.allPost);
 
 router.get('/log-in', isLogin, (req, res) => res.render('log-in_form'));
 router.post('/log-in', passport.authenticate('local', {
@@ -44,17 +44,25 @@ router.get('/club', checkAuth, (req, res) => {
   res.render('club', {user: req.user});
 })
 router.post('/club', checkAuth, (req, res, next) => {
-  User.findOneAndUpdate({email: req.user.email}, {inClub: !req.user.inClub}).exec((err, result) => {
-    if(err){
-      return next(err);
-    }
-
-    res.redirect('/');
-  })
+  if(req.body.code == 'code'){
+    User.findOneAndUpdate({email: req.user.email}, {inClub: !req.user.inClub}).exec((err, result) => {
+      if(err){
+        return next(err);
+      }
+  
+      res.redirect('/');
+    })
+  }else{
+    res.render('club', {err: 'incorrect answer', user: req.user});
+  }
 })
 
 router.get('/create', checkAuth, (req, res) => {
   res.render('createPost')
+})
+
+router.get('/admin', (req, res) => {
+  res.render('admin');
 })
 
 router.post('/create', checkAuth, postController.createPost);
